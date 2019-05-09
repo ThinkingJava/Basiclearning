@@ -72,10 +72,304 @@ static代码块,static关键字还有一个比较关键的作用就是 用来形
 
 # **4.反射机制**
 
-Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。
+JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法;对于任意一个对象，都能够调用它的任意方法和属性;这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。
 
 ![avatar](data:image/jpeg;base64,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)
 
-这个方法其实是Object的一个方法，Class继承了Object，所以我们可以直接使用。
+1.反射用于动态类加载
 
-![avatar](data:image/jpeg;base64,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)
+![avatar](E:20180703205137276.jpg)
+
+2.方法反射实例
+
+```java
+          public class ReflectCase {
+
+            public static void main(String[] args) throws Exception {
+                Proxy target = new Proxy();
+                Method method = Proxy.class.getDeclaredMethod("run");
+                method.invoke(target);
+            }
+
+            static class Proxy {
+                public void run() {
+                    System.out.println("run");
+                }
+            }
+        }
+```
+通过Java的反射机制，可以在运行期间调用对象的任何方法，如果大量使用这种方式进行调用，会有性能或内存隐患么？为了彻底了解方法的反射机制，只能从底层代码入手了。
+
+Method获取
+
+调用`Class`类的`getDeclaredMethod`可以获取指定方法名和参数的方法对象`Method`
+
+```JAVA
+        @CallerSensitive
+        public Field getDeclaredField(String name)
+            throws NoSuchFieldException, SecurityException {
+            checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true);
+            Field field = searchFields(privateGetDeclaredFields(false), name);
+            if (field == null) {
+                throw new NoSuchFieldException(name);
+            }
+            return field;
+        }
+```
+
+其中`privateGetDeclaredMethods`方法从缓存或JVM中获取该`Class`中申明的方法列表，`searchMethods`方法将从返回的方法列表里找到一个匹配名称和参数的方法对象。
+
+```java
+        private static Method searchMethods(Method[] methods,
+                                            String name,
+                                            Class<?>[] parameterTypes)
+        {
+            Method res = null;
+            String internedName = name.intern();
+            for (int i = 0; i < methods.length; i++) {
+                Method m = methods[i];
+                if (m.getName() == internedName
+                    && arrayContentsEq(parameterTypes, m.getParameterTypes())
+                    && (res == null
+                        || res.getReturnType().isAssignableFrom(m.getReturnType())))
+                    res = m;
+            }
+
+            return (res == null ? res : getReflectionFactory().copyMethod(res));
+        }
+```
+
+如果找到一个匹配的`Method`，则重新copy一份返回，即`Method.copy()`方法
+
+```java
+        Method copy() {
+            // This routine enables sharing of MethodAccessor objects
+            // among Method objects which refer to the same underlying
+            // method in the VM. (All of this contortion is only necessary
+            // because of the "accessibility" bit in AccessibleObject,
+            // which implicitly requires that new java.lang.reflect
+            // objects be fabricated for each reflective call on Class
+            // objects.)
+            if (this.root != null)
+                throw new IllegalArgumentException("Can not copy a non-root Method");
+
+            Method res = new Method(clazz, name, parameterTypes, returnType,
+                                    exceptionTypes, modifiers, slot, signature,
+                                    annotations, parameterAnnotations, annotationDefault);
+            res.root = this;
+            // Might as well eagerly propagate this if already present
+            res.methodAccessor = methodAccessor;
+            return res;
+        }
+```
+
+privateGetDeclaredMethods
+
+从缓存或JVM中获取该`Class`中申明的方法列表，实现如下：
+
+```java
+        private Field[] privateGetDeclaredFields(boolean publicOnly) {
+            checkInitted();
+            Field[] res;
+            ReflectionData<T> rd = reflectionData();
+            if (rd != null) {
+                res = publicOnly ? rd.declaredPublicFields : rd.declaredFields;
+                if (res != null) return res;
+            }
+            // No cached value available; request value from VM
+            res = Reflection.filterFields(this, getDeclaredFields0(publicOnly));
+            if (rd != null) {
+                if (publicOnly) {
+                    rd.declaredPublicFields = res;
+                } else {
+                    rd.declaredFields = res;
+                }
+            }
+            return res;
+        }
+```
+
+其中`reflectionData()`方法实现如下：
+
+```java
+        private ReflectionData<T> reflectionData() {
+            SoftReference<ReflectionData<T>> reflectionData = this.reflectionData;
+            int classRedefinedCount = this.classRedefinedCount;
+            ReflectionData<T> rd;
+            if (useCaches &&
+                reflectionData != null &&
+                (rd = reflectionData.get()) != null &&
+                rd.redefinedCount == classRedefinedCount) {
+                return rd;
+            }
+            // else no SoftReference or cleared SoftReference or stale ReflectionData
+            // -> create and replace new instance
+            return newReflectionData(reflectionData, classRedefinedCount);
+        }
+```
+
+这里有个比较重要的数据结构`ReflectionData`，用来缓存从JVM中读取类的如下属性数据：
+
+```java
+        private static class ReflectionData<T> {
+            volatile Field[] declaredFields;
+            volatile Field[] publicFields;
+            volatile Method[] declaredMethods;
+            volatile Method[] publicMethods;
+            volatile Constructor<T>[] declaredConstructors;
+            volatile Constructor<T>[] publicConstructors;
+            // Intermediate results for getFields and getMethods
+            volatile Field[] declaredPublicFields;
+            volatile Method[] declaredPublicMethods;
+            volatile Class<?>[] interfaces;
+
+            // Value of classRedefinedCount when we created this ReflectionData instance
+            final int redefinedCount;
+
+            ReflectionData(int redefinedCount) {
+                this.redefinedCount = redefinedCount;
+            }
+        }
+从reflectionData()方法实现可以看出：reflectionData对象是SoftReference类型的，说明在内存紧张时可能会被回收，不过也可以通过-XX:SoftRefLRUPolicyMSPerMB参数控制回收的时机，只要发生GC就会将其回收，如果reflectionData被回收之后，又执行了反射方法，那只能通过newReflectionData方法重新创建一个这样的对象了，newReflectionData方法实现如下：
+         private ReflectionData<T> newReflectionData(SoftReference<ReflectionData<T>> oldReflectionData,
+                                                        int classRedefinedCount) {
+                if (!useCaches) return null;
+
+                while (true) {
+                    ReflectionData<T> rd = new ReflectionData<>(classRedefinedCount);
+                    // try to CAS it...
+                    if (Atomic.casReflectionData(this, oldReflectionData, new SoftReference<>(rd))) {
+                        return rd;
+                    }
+                    // else retry
+                    oldReflectionData = this.reflectionData;
+                    classRedefinedCount = this.classRedefinedCount;
+                    if (oldReflectionData != null &&
+                        (rd = oldReflectionData.get()) != null &&
+                        rd.redefinedCount == classRedefinedCount) {
+                        return rd;
+                    }
+                }
+            }
+通过unsafe.compareAndSwapObject方法重新设置reflectionData字段;
+在privateGetDeclaredMethods方法中，如果通过reflectionData()获得的ReflectionData对象不为空，则尝试从ReflectionData对象中获取declaredMethods属性，如果是第一次，或则被GC回收之后，重新初始化后的类属性为空，则需要重新到JVM中获取一次，并赋值给ReflectionData，下次调用就可以使用缓存数据了。
+Method调用
+
+获取到指定的方法对象Method之后，就可以调用它的invoke方法了，invoke实现如下：
+```
+
+```java
+        @CallerSensitive
+        public Object invoke(Object obj, Object... args)
+            throws IllegalAccessException, IllegalArgumentException,
+               InvocationTargetException
+        {
+            if (!override) {
+                if (!Reflection.quickCheckMemberAccess(clazz, modifiers)) {
+                    Class<?> caller = Reflection.getCallerClass();
+                    checkAccess(caller, clazz, obj, modifiers);
+                }
+            }
+            MethodAccessor ma = methodAccessor;             // read volatile
+            if (ma == null) {
+                ma = acquireMethodAccessor();
+            }
+            return ma.invoke(obj, args);
+        }
+```
+
+应该注意到：这里的`MethodAccessor`对象是`invoke`方法实现的关键，一开始`methodAccessor`为空，需要调用`acquireMethodAccessor`生成一个新的`MethodAccessor`对象，`MethodAccessor`本身就是一个接口，实现如下：
+
+```java
+public interface MethodAccessor {
+    Object invoke(Object var1, Object[] var2) throws IllegalArgumentException, InvocationTargetException;
+}
+
+在acquireMethodAccessor方法中，会通过ReflectionFactory类的newMethodAccessor创建一个实现了MethodAccessor接口的对象，实现如下：
+        public MethodAccessor newMethodAccessor(Method var1) {
+            checkInitted();
+            if (noInflation && !ReflectUtil.isVMAnonymousClass(var1.getDeclaringClass())) {
+                return (new MethodAccessorGenerator()).generateMethod(var1.getDeclaringClass(), var1.getName(), var1.getParameterTypes(), var1.getReturnType(), var1.getExceptionTypes(), var1.getModifiers());
+            } else {
+                NativeMethodAccessorImpl var2 = new NativeMethodAccessorImpl(var1);
+                DelegatingMethodAccessorImpl var3 = new DelegatingMethodAccessorImpl(var2);
+                var2.setParent(var3);
+                return var3;
+            }
+        }
+```
+
+在`ReflectionFactory`类中，有2个重要的字段：`noInflation`(默认`false`)和`inflationThreshold`(默认15)，在`checkInitted`方法中可以通过`-Dsun.reflect.inflationThreshold=xxx`和`-Dsun.reflect.noInflation=true`对这两个字段重新设置，而且只会设置一次；
+
+如果`noInflation`为`false`，方法`newMethodAccessor`都会返回`DelegatingMethodAccessorImpl`对象，`DelegatingMethodAccessorImpl`的类实现
+
+```java
+        class DelegatingMethodAccessorImpl extends MethodAccessorImpl {
+            private MethodAccessorImpl delegate;
+
+            DelegatingMethodAccessorImpl(MethodAccessorImpl var1) {
+                this.setDelegate(var1);
+            }
+
+            public Object invoke(Object var1, Object[] var2) throws IllegalArgumentException, InvocationTargetException {
+                return this.delegate.invoke(var1, var2);
+            }
+
+            void setDelegate(MethodAccessorImpl var1) {
+                this.delegate = var1;
+            }
+        }
+```
+
+其实，`DelegatingMethodAccessorImpl`对象就是一个代理对象，负责调用被代理对象`delegate`的`invoke`方法，其中`delegate`参数目前是`NativeMethodAccessorImpl`对象，所以最终`Method`的`invoke`方法调用的是`NativeMethodAccessorImpl`对象`invoke`方法，实现如下：
+
+```java
+    class NativeMethodAccessorImpl extends MethodAccessorImpl {
+        private final Method method;
+        private DelegatingMethodAccessorImpl parent;
+        private int numInvocations;
+
+        NativeMethodAccessorImpl(Method var1) {
+            this.method = var1;
+        }
+
+        public Object invoke(Object var1, Object[] var2) throws IllegalArgumentException, InvocationTargetException {
+            if (++this.numInvocations > ReflectionFactory.inflationThreshold() && !ReflectUtil.isVMAnonymousClass(this.method.getDeclaringClass())) {
+                MethodAccessorImpl var3 = (MethodAccessorImpl)(new MethodAccessorGenerator()).generateMethod(this.method.getDeclaringClass(), this.method.getName(), this.method.getParameterTypes(), this.method.getReturnType(), this.method.getExceptionTypes(), this.method.getModifiers());
+                this.parent.setDelegate(var3);
+            }
+
+            return invoke0(this.method, var1, var2);
+        }
+
+        void setParent(DelegatingMethodAccessorImpl var1) {
+            this.parent = var1;
+        }
+
+        private static native Object invoke0(Method var0, Object var1, Object[] var2);
+    }
+这里用到了ReflectionFactory类中的inflationThreshold，当delegate调用了15次invoke方法之后，如果继续调用就通过MethodAccessorGenerator类的generateMethod方法生成MethodAccessorImpl对象，并设置为delegate对象，这样下次执行Method.invoke时，就调用新建的MethodAccessor对象的invoke()方法了。
+
+这里需要注意的是：
+generateMethod方法在生成MethodAccessorImpl对象时，会在内存中生成对应的字节码，并调用ClassDefiner.defineClass创建对应的class对象，实现如下：
+         return (MagicAccessorImpl)AccessController.doPrivileged(new PrivilegedAction<MagicAccessorImpl>() {
+                        public MagicAccessorImpl run() {
+                            try {
+                                return (MagicAccessorImpl)ClassDefiner.defineClass(var13, var17, 0, var17.length, var1.getClassLoader()).newInstance();
+                            } catch (IllegalAccessException | InstantiationException var2) {
+                                throw new InternalError(var2);
+                            }
+                        }
+                    });
+在ClassDefiner.defineClass方法实现中，每被调用一次都会生成一个DelegatingClassLoader类加载器对象
+        static Class<?> defineClass(String var0, byte[] var1, int var2, int var3, final ClassLoader var4) {
+            ClassLoader var5 = (ClassLoader)AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+                public ClassLoader run() {
+                    return new DelegatingClassLoader(var4);
+                }
+            });
+            return unsafe.defineClass(var0, var1, var2, var3, var5, (ProtectionDomain)null);
+        }
+```
+
+这里每次都生成新的类加载器，是为了性能考虑，在某些情况下可以卸载这些生成的类，因为类的卸载是只有在类加载器可以被回收的情况下才会被回收的，如果用了原来的类加载器，那可能导致这些新创建的类一直无法被卸载，从其设计来看本身就不希望这些类一直存在内存里的，在需要的时候有就行了。

@@ -1,0 +1,10 @@
+redis.conf中的appendfysnc是对redis性能有重要影响的参数之一。可取三种值：always、everysec和no。 
+
+设置为always时，会极大消弱Redis的性能，因为这种模式下每次write后都会调用fsync（Linux为调用fdatasync）。 
+
+如果设置为no，则write后不会有fsync调用，由操作系统自动调度刷磁盘，性能是最好的。 
+
+everysec为最多每秒调用一次fsync，这种模式性能并不是很糟糕，一般也不会产生毛刺，这归功于Redis引入了BIO线程，所有fsync操作都异步交给了BIO线程。 
+
+另外，Redis在处理一条命令时，并不立即调用write写AOF文件，只是将数据写入到AOF buffer（server.aof_buf）中。调用write和命令处理是分开的，Redis只在每次进入epoll_wait之前做write操作。 
+

@@ -1,0 +1,11 @@
+开启AOF功能需要设置配置：appendonly yes，默认不开启。AOF文件名
+通过appendfilename配置设置，默认文件名是appendonly.aof。保存路径同
+RDB持久化方式一致，通过dir配置指定。AOF的工作流程操作：命令写入
+（append）、文件同步（sync）、文件重写（rewrite）、重启加载（load）
+
+
+1）所有的写入命令会追加到aof_buf（缓冲区）中。
+2）AOF缓冲区根据对应的策略向硬盘做同步操作。
+3）随着AOF文件越来越大，需要定期对AOF文件进行重写，达到压缩
+的目的。
+4）当Redis服务器重启时，可以加载AOF文件进行数据恢复。

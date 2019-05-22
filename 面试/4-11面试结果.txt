@@ -1,0 +1,26 @@
+mysql底层数据结构
+
+redis单线程
+
+
+jvm
+
+mybatis底层实现
+
+volatile关键字
+
+
+没有人的人生会顺利，夜深人静的时候自我否定过多少次 又在清晨来临时 重整旗鼓吗
+
+
+HashMap，HashTable和ConcurrentHashMap的区别
+
+HashMap和HashTable的对比
+1.HashMap是非线程安全的，HashTable是线程安全的，HashTable中的很多方法都是加了sysnchronized关键字的，确保了方法的同步；
+2.HashMap可以接受空key和value，而HashTable不能接受空key和value；
+3.由于HashMap是异步执行，而HashTable是同步执行，所以在单线程环境下，HashMap的速度高于HashTable；
+HashTable和ConCurrentHashMap的对比
+ConcurrentHashMap引入了分割(Segment)，上面代码中的最后一行其实就可以理解为把一个大的Map拆分成N个小的HashTable，在put方法中，会根据hash(paramK.hashCode())来决定具体存放进哪个Segment，如果查看Segment的put操作，我们会发现内部使用的同步机制是基于lock操作的，这样就可以对Map的一部分（Segment）进行上锁，这样影响的只是将要放入同一个Segment的元素的put操作，保证同步的时候，锁住的不是整个Map（HashTable就是这么做的），相对于HashTable提高了多线程环境下的性能，因此HashTable已经被淘汰了。
+HashMap和ConCurrentHashMap的对比
+（1）ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好，而HashMap没有锁机制，不是线程安全的
+（2）HashMap的键值对允许有null，但是ConCurrentHashMap都不允许。

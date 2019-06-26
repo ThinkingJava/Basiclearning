@@ -13,6 +13,7 @@ volatile关键字
 没有人的人生会顺利，夜深人静的时候自我否定过多少次 又在清晨来临时 重整旗鼓吗
 
 
+
 HashMap，HashTable和ConcurrentHashMap的区别
 
 HashMap和HashTable的对比
@@ -24,3 +25,6 @@ ConcurrentHashMap引入了分割(Segment)，上面代码中的最后一行其实
 HashMap和ConCurrentHashMap的对比
 （1）ConcurrentHashMap对整个桶数组进行了分割分段(Segment)，然后在每一个分段上都用lock锁进行保护，相对于HashTable的syn关键字锁的粒度更精细了一些，并发性能更好，而HashMap没有锁机制，不是线程安全的
 （2）HashMap的键值对允许有null，但是ConCurrentHashMap都不允许。
+
+
+mybatis

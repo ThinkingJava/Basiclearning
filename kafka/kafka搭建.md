@@ -15,7 +15,7 @@ services:
       - "9092:9092"
     environment:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.0.103:9092
-      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_LISTENERS: PLAINTEXT://192.168.0.103:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: "topic001:2:1"
     volumes:
@@ -100,3 +100,60 @@ spring:
 
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 使用Docker搭建Kafka开发环境
+
+#### download images
+
+```python
+docker pull wurstmeister/zookeeper
+docker pull wurstmeister/kafka
+docker pull sheepkiller/kafka-manager
+```
+
+#### run zookepper
+
+```python
+docker run -d --name zookeeper --publish 2181:2181 \
+  --volume /etc/localtime:/etc/localtime \
+  --restart=always \
+  wurstmeister/zookeeper
+```
+
+#### run kafka
+
+```python
+docker run --name kafka \
+  -p 9092:9092 \
+  --link zookeeper:zookeeper \
+  -e KAFKA_ADVERTISED_HOST_NAME=192.168.0.103 \
+  -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -d  wurstmeister/kafka  
+```
+
+#### run kafka manager
+
+```python
+docker run -it --rm -d \
+  --link zookeeper:zookeeper \
+  -p 9000:9000 \
+  -e ZK_HOSTS="zookeeper:2181" \
+  -e APPLICATION_SECRET=letmein sheepkiller/kafka-manager
+```
